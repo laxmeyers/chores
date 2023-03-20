@@ -31,6 +31,20 @@ namespace chores.Controllers
             }
         }
 
+        [HttpGet("{choreId}")]
+        public ActionResult<Chore> GetChoreById(int choreId)
+        {
+            try
+            {
+                Chore chore = _choresService.GetChoreById(choreId);
+                return chore;
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost]
         public ActionResult<Chore> CreateChore([FromBody] Chore choreData)
         {
@@ -45,12 +59,12 @@ namespace chores.Controllers
             }
         }
 
-        [HttpGet("{choreId}")]
-        public ActionResult<Chore> GetChoreById(int choreId)
+        [HttpDelete("{choreId}")]
+        public ActionResult<string> RemoveChore(int choreId)
         {
             try
             {
-                Chore chore = _choresService.GetChoreById(choreId);
+                string chore = _choresService.RemoveChore(choreId);
                 return chore;
             }
             catch (Exception e)
@@ -58,5 +72,21 @@ namespace chores.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpDelete("{choreId}/finished")]
+        public ActionResult<Chore> FinishedChore(int choreId)
+        {
+            try
+            {
+                Chore chore = _choresService.FinishedChore(choreId);
+                return chore;
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
     }
 }

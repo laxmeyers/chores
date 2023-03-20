@@ -33,4 +33,11 @@ public class ChoresRepository
         if (chore == null) throw new Exception($"{choreId} is not a valid Id");
         return chore;
     }
+
+    internal bool RemoveChore(int choreId)
+    {
+        int count = dbChores.RemoveAll(c => c.Id == choreId);
+        return count > 0;
+
+    }
 }
